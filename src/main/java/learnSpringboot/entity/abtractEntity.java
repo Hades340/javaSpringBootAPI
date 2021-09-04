@@ -27,18 +27,18 @@ import lombok.Data;
 public abstract class abtractEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	@Column(nullable = false)
-	
+	@CreatedBy
 	private String createBy;
 	@Column 
-	
+	@LastModifiedBy
 	private String modifyBy;
 	@Column
-	
+	@CreatedDate
 	private Date createDate;
 	@Column
-	
+	@LastModifiedDate
 	private Date modifyDate;
 	
 }

@@ -14,6 +14,7 @@ public class newsConverter  {
 		news.setNews_name(entity.getNews_name());
 		news.setSlug(entity.getSlug());
 		news.setThumnail(entity.getThumnail());
+		
 		return news;
 	}
 	public newsEntity toEntity(newsDTO dto) {
@@ -23,6 +24,7 @@ public class newsConverter  {
 		news.setNews_name(dto.getNews_name());
 		news.setSlug(dto.getSlug());
 		news.setThumnail(dto.getThumnail());
+		news.setCreateBy(dto.getCreateBy());
 		return news;
 	}
 	

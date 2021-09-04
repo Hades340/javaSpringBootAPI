@@ -26,8 +26,9 @@ public class NewsService implements INewsService{
 		try {
 			 categoryEntity categorsy = category.findOneByid(dto.getCategory_Code());
 			 newsEntity newsEntity = conver.toEntity(dto);
-			 newsEntity.setCategory(categorsy); newRepo.save(newsEntity);
-			 
+			 newsEntity.setCategory(categorsy); 
+			 newRepo.save(newsEntity);
+			 result = true;
 		} catch (Exception e) {
 			e.getMessage();
 		}
@@ -35,9 +36,17 @@ public class NewsService implements INewsService{
 	}
 
 	@Override
-	public boolean delete(newsDTO dto) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean delete(Long[] ids) {
+		boolean result = false;
+		try {
+			for (long item : ids) {
+				newRepo.deleteById(item);
+			}
+			result= true;
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return result;
 	}
 
 }
