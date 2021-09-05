@@ -1,6 +1,11 @@
 package learnSpringboot.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import learnSpringboot.converter.newsConverter;
@@ -47,6 +52,31 @@ public class NewsService implements INewsService{
 			e.getMessage();
 		}
 		return result;
+	}
+
+	@Override
+	public List<newsDTO> findAll(Pageable pageable) {
+		List<newsEntity> newsEntities = newRepo.findAll(pageable).getContent();
+		List<newsDTO> listNews = new ArrayList<newsDTO>();
+		for (newsEntity item : newsEntities) {
+			listNews.add(conver.toDTO(item));
+		}
+		return listNews;
+	}
+
+	@Override
+	public int totalItem() {
+		return (int) newRepo.count();
+	}
+
+	@Override
+	public List<newsDTO> findAll() {
+		List<newsEntity> newsEntities = newRepo.findAll();
+		List<newsDTO> listNews = new ArrayList<newsDTO>();
+		for (newsEntity item : newsEntities) {
+			listNews.add(conver.toDTO(item));
+		}
+		return listNews;
 	}
 
 }
